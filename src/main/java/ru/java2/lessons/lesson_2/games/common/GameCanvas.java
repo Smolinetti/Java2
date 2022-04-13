@@ -1,13 +1,13 @@
-package ru.java2.circles;
+package ru.java2.lessons.lesson_2.games.common;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GameCanvas extends JPanel {
     private long lastFrameTime;
-    private MainCircles controller;
+    private Controller controller;
 
-    GameCanvas(MainCircles controller) {
+    public GameCanvas(Controller controller) {
         lastFrameTime = System.nanoTime();
         this.controller = controller;
     }

@@ -1,8 +1,12 @@
-package ru.java2.circles;
+package ru.java2.lessons.lesson_2.games.circles;
+
+import ru.java2.lessons.lesson_2.games.common.CommonObject;
+import ru.java2.lessons.lesson_2.games.common.GameCanvas;
+
 
 import java.awt.*;
 
-public class Background extends Sprite {
+public class Background extends CommonObject {
 
     private float time;
     private static final float AMPLITUDE = 255f / 2f;
