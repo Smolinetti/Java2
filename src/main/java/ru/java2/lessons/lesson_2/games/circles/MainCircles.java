@@ -1,41 +1,43 @@
-package ru.java2.circles;
+package ru.java2.lessons.lesson_2.games.circles;
 
-import javax.swing.*;
-import java.awt.*;
+import ru.java2.lessons.lesson_2.games.common.CommonObject;
+import ru.java2.lessons.lesson_2.games.common.Controller;
+import ru.java2.lessons.lesson_2.games.common.GameCanvas;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class MainCircles extends JFrame {
-    private static final int POS_X = 300;
-    private static final int POS_Y = 70;
+public class MainCircles extends JFrame implements Controller {
+    private static final int POS_X = 400;
+    private static final int POS_Y = 200;
     private static final int WINDOW_WIDTH = 800;
     private static final int WINDOW_HEIGHT = 600;
 
-    private Sprite[] sprites = new Sprite[1];
-    private int spritesCount;
+    private CommonObject[] objects = new CommonObject[1];
+    private int objectsCount;
 
     private void update(GameCanvas canvas, float deltaTime) {
-        for (int i = 0; i < spritesCount; i++) {
-            sprites[i].update(canvas, deltaTime);
+        for (int i = 0; i < objectsCount; i++) {
+            objects[i].update(canvas, deltaTime);
         }
     }
 
     private void render(GameCanvas canvas, Graphics g) {
-        for (int i = 0; i < spritesCount; i++) {
-            sprites[i].render(canvas, g);
+        for (int i = 0; i < objectsCount; i++) {
+            objects[i].render(canvas, g);
         }
     }
 
-    void onDrawCanvas(GameCanvas c, Graphics g, float deltaTime) {
+    @Override
+    public void onDrawCanvas(GameCanvas c, Graphics g, float deltaTime) {
         update(c, deltaTime);
         render(c, g);
     }
 
     private void initApplication() {
-        addSprite(new Background());
+        addObjects(new Background());
     }
 
     private MainCircles() {
@@ -47,7 +49,7 @@ public class MainCircles extends JFrame {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1)
-                    addSprite(new Ball(e.getX(), e.getY()));
+                    addObjects(new Ball(e.getX(), e.getY()));
                 else if (e.getButton() == MouseEvent.BUTTON3)
                     removeSprite();
             }
@@ -57,17 +59,17 @@ public class MainCircles extends JFrame {
         setVisible(true);
     }
 
-    private void addSprite(Sprite s) {
-        if (spritesCount == sprites.length) {
-            Sprite[] temp = new Sprite[sprites.length * 2];
-            System.arraycopy(sprites, 0, temp, 0, sprites.length);
-            sprites = temp;
+    private void addObjects(CommonObject s) {
+        if (objectsCount == objects.length) {
+            CommonObject[] temp = new CommonObject[objects.length * 2];
+            System.arraycopy(objects, 0, temp, 0, objects.length);
+            objects = temp;
         }
-        sprites[spritesCount++] = s;
+        objects[objectsCount++] = s;
     }
 
     private void removeSprite() {
-        if (spritesCount > 1) spritesCount--;
+        if (objectsCount > 1) objectsCount--;
     }
 
     public static void main(String[] args) {

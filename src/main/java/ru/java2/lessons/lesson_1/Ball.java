@@ -1,4 +1,4 @@
-package ru.java2.circles;
+package ru.java2.lessons.lesson_1;
 
 import java.awt.*;
 import java.util.Random;
